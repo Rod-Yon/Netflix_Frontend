@@ -13,6 +13,20 @@ code {
 }
 
 @font-face {
+  font-family: 'ABeeZee';
+  src: url('../../../public/assets/fonts/ABeeZee-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ABeeZee';
+  src: url('../../../public/assets/fonts/ABeeZee-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Bebas Neue';
   src: url('../../../public/assets/fonts/BebasNeue-Regular.ttf') format('truetype');
   font-weight: 400;
