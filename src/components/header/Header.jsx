@@ -53,13 +53,12 @@ export default function HomePage() {
                 <Typography key={item} sx={{
                   mr: 2,
                   cursor: "pointer",
-                  fontFamily: item === "Browse" ? "Bebas Neue, sans-serif" : "Netflix Sans, sans-serif",
+                  fontFamily: item === "Browse" ? "ABeeZee, sans-serif" : "Netflix Sans, sans-serif",
                   fontWeight: item === "Home" ? "bold" : 400,
                   fontSize: item === "Browse" ? "16px" : "14px",
                   color: "#fff",
                 }}>
                   {item}
-                  {/* need to be chaged to the font of browse */}
                 </Typography>
               ))
             ) : (
