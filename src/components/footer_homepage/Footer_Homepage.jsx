@@ -3,7 +3,6 @@ import {
   Box,
   Typography,
   Link,
-  Grid,
   IconButton,
   Button,
 } from "@mui/material";
@@ -37,65 +36,85 @@ export default function Footer() {
       sx={{
         backgroundColor: "#141414",
         color: "#757575",
-        px: { xs: 4, sm: 6 },
         py: 6,
         mt: 8,
         fontSize: "13px",
       }}
     >
-      {/* Social icons */}
-      <Box sx={{ mb: 3 }}>
-        <IconButton sx={{ color: "#757575" }}>
-          <FacebookIcon fontSize="small" />
-        </IconButton>
-        <IconButton sx={{ color: "#757575" }}>
-          <InstagramIcon fontSize="small" />
-        </IconButton>
-        <IconButton sx={{ color: "#757575" }}>
-          <TwitterIcon fontSize="small" />
-        </IconButton>
-        <IconButton sx={{ color: "#757575" }}>
-          <YouTubeIcon fontSize="small" />
-        </IconButton>
-      </Box>
+      {/* Inner container for proper spacing */}
+      <Box
+        sx={{
+          maxWidth: "1200px",
+          mx: "auto",
+          px: { xs: 3, sm: 6 },
+        }}
+      >
+        {/* Social icons */}
+        <Box sx={{ mb: 3 }}>
+          <IconButton sx={{ color: "#757575", mr: 1 }}>
+            <FacebookIcon sx={{ width: 36, height: 30 }} />
+          </IconButton>
+          <IconButton sx={{ color: "#757575", mr: 1 }}>
+            <InstagramIcon sx={{ width: 36, height: 30 }} />
+          </IconButton>
+          <IconButton sx={{ color: "#757575", mr: 1 }}>
+            <TwitterIcon sx={{ width: 36, height: 30 }} />
+          </IconButton>
+          <IconButton sx={{ color: "#757575" }}>
+            <YouTubeIcon sx={{ width: 36, height: 30 }} />
+          </IconButton>
+        </Box>
 
-      {/* Grid: 4 columns */}
-      <Grid container spacing={1}>
-        {links.map((text, index) => (
-          <Grid item xs={6} sm={3} key={index}>
+        {/* 4-column layout using CSS grid (MUI v6-compatible) */}
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "repeat(2, 1fr)",   // 2 columns on mobile
+              sm: "repeat(4, 1fr)",   // 4 columns on desktop
+            },
+            gap: 1,
+            mb: 3,
+          }}
+        >
+          {links.map((text, index) => (
             <Link
+              key={index}
               href="#"
               underline="hover"
               color="inherit"
-              sx={{ fontSize: "13px", display: "block", mb: 1 }}
+              sx={{
+                fontSize: "13px",
+                display: "block",
+              }}
             >
               {text}
             </Link>
-          </Grid>
-        ))}
-      </Grid>
+          ))}
+        </Box>
 
-      {/* Service Code button */}
-      <Box sx={{ mt: 4 }}>
-        <Button
-          variant="outlined"
-          sx={{
-            color: "#757575",
-            borderColor: "#757575",
-            fontSize: "12px",
-            textTransform: "none",
-            px: 2,
-            py: 0.5,
-          }}
-        >
-          Service Code
-        </Button>
+        {/* Service Code button */}
+        <Box sx={{ mt: 2 }}>
+          <Button
+            variant="outlined"
+            sx={{
+              color: "#757575",
+              borderColor: "#757575",
+              fontSize: "12px",
+              textTransform: "none",
+              px: 2,
+              py: 0.5,
+            }}
+          >
+            Service Code
+          </Button>
+        </Box>
+
+        {/* Copyright */}
+        <Typography sx={{ mt: 2, fontSize: "12px" }}>
+          © 1997-2024 Netflix, Inc.
+        </Typography>
       </Box>
-
-      {/* Copyright */}
-      <Typography sx={{ mt: 2, fontSize: "12px" }}>
-        © 1997-2024 Netflix, Inc.
-      </Typography>
     </Box>
   );
 }
