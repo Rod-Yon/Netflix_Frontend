@@ -4,6 +4,9 @@ import './Background.css';
 
 export default function Background() {
     return (
-        <div className='background' />
+        <div>
+            <div className='background' />
+            <div className='black_background'></div>
+        </div>
     );
 };

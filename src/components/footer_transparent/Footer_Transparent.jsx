@@ -1,8 +1,16 @@
 import React from 'react';
 
 import './Footer_Transparent.css';
+import SelectionMenu from '../selection_menu/Selection_Menu';
 
 export default function Footer_Transparent() {
+
+    const languages = [
+        { value: 'en', text: 'English' },
+        { value: 'ru', text: 'Russian' },
+        { value: 'es', text: 'Spanish' },
+        { value: 'fr', text: 'French' },
+      ];
 
     const Do_Nothing = () => { };
 
@@ -14,7 +22,6 @@ export default function Footer_Transparent() {
                         <span>
                             Questions? Call&nbsp;<button className='empty_link' onClick={Do_Nothing}>1-844-505-2993</button>
                         </span>
-
                     </div>
                 </div>
                 <div className='links_row'>
@@ -39,6 +46,9 @@ export default function Footer_Transparent() {
                     <div className='links_column'>
                         <button className='empty_link' onClick={Do_Nothing}>Ad Choices</button>
                     </div>
+                </div>
+                <div className='links_row'>
+                    <SelectionMenu values={languages}/>
                 </div>
             </div>
         </div >
