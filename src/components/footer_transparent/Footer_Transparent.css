@@ -13,8 +13,6 @@
 }
 
 .footer_transparent {
-    position: fixed;
-    bottom: 0;
     width: 100%;
     padding: 1rem;
     background-color: rgba(0, 0, 0, 0.6);
@@ -26,15 +24,10 @@
 .links_container {
     display: flex;
     flex-direction: column;
-    margin-top: min(72px, 10%);
-    margin-bottom: min(72px, 10%);
-    margin-left: min(168px, 20%);
-    margin-right: min(168px, 20%);
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 2rem 1rem;
+    margin: 0 auto;
+    width: 100%;
     max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
     gap: 24px;
 }
 
