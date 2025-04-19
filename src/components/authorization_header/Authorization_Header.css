@@ -1,0 +1,31 @@
+.authorization_header {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.authorization_header_inner {
+    height: 92px;
+    display: flex;
+    align-items: center;
+    padding: 0 48px;
+    box-sizing: border-box;
+}
+
+.netflix_logo {
+    height: 45px;
+    width: auto;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .authjrization_header {
+        padding: 16px;
+    }
+
+    .netflix_logo {
+        height: 32px;
+    }
+}
