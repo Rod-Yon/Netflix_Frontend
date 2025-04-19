@@ -98,7 +98,7 @@ export default function Billboard() {
                 <Box
                     sx={{
                         position: "absolute",
-                        bottom: { xs: 80, sm: 180 },
+                        bottom: { xs: 80, sm: 170 },
                         right: 0,
                         display: "flex",
                         alignItems: "center",
