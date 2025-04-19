@@ -7,5 +7,16 @@
   background-image: url('../../../public/assets/images/background.png');
   background-size: cover;
   background-position: center;
+  z-index: -2;
+}
+.black_background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0, 0, 0, 0.3) ;
+  background-size: cover;
+  background-position: center;
   z-index: -1;
 }
