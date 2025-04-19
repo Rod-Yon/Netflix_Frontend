@@ -1,4 +1,3 @@
-// pages/HomePage.jsx
 import React from "react";
 import {
     AppBar,
@@ -11,9 +10,9 @@ import {
     useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import SearchIcon from '@mui/icons-material/Search';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import SearchIcon from "@mui/icons-material/Search";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useTheme } from "@mui/material/styles";
 
 
@@ -21,6 +20,9 @@ export default function HomePage() {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
+    const [profileAnchorEl, setProfileAnchorEl] = React.useState(null);
+    const handleProfileClick = (event) => setProfileAnchorEl(event.currentTarget);
+    const handleProfileClose = () => setProfileAnchorEl(null);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
     const handleMenuClose = () => setAnchorEl(null);
@@ -31,8 +33,7 @@ export default function HomePage() {
         <div
             style={{
                 position: "relative",
-                // height: "100vh",
-                backgroundImage: `url(/path/to/cover.jpg)`, // need to add cover photo from father component
+                backgroundImage: `url(/path/to/cover.jpg)`, // will be handled by Billboard anyway
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }}
@@ -43,29 +44,40 @@ export default function HomePage() {
                 sx={{
                     background: "transparent",
                     color: "#fff",
-                    zIndex: 10, // ensures it's above billboard
+                    zIndex: 10,
                 }}
             >
                 <Toolbar sx={{ justifyContent: "space-between" }}>
+                    {/* Left side: Logo + nav */}
                     <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <Box sx={{ mr: 4 }}>
-                            <img
-                                src='../../../public/assets/images/netflix-logo.png'
-                                alt="Netflix Logo"
-                                style={{ height: "24px", objectFit: "contain" }}
-                            />
-                        </Box>
+                        {/* Netflix logo */}
+                        <Box
+                            sx={{
+                                width: 80,
+                                height: 24,
+                                backgroundImage: `url(/assets/images/netfilx_logo.png)`,
+                                backgroundSize: "contain",
+                                backgroundRepeat: "no-repeat",
+                                backgroundPosition: "left",
+                                mr: 4,
+                            }}
+                        />
 
+                        {/* Desktop nav */}
                         {!isMobile ? (
                             navItems.map((item) => (
-                                <Typography key={item} sx={{
-                                    mr: 2,
-                                    cursor: "pointer",
-                                    fontFamily: item === "Browse" ? "ABeeZee, sans-serif" : "Netflix Sans, sans-serif",
-                                    fontWeight: item === "Home" ? "bold" : 400,
-                                    fontSize: item === "Browse" ? "16px" : "14px",
-                                    color: "#fff",
-                                }}>
+                                <Typography
+                                    key={item}
+                                    sx={{
+                                        mr: 2,
+                                        cursor: "pointer",
+                                        fontFamily:
+                                            item === "Browse" ? "ABeeZee, sans-serif" : "Netflix Sans, sans-serif",
+                                        fontWeight: item === "Home" ? "bold" : 400,
+                                        fontSize: item === "Browse" ? "16px" : "14px",
+                                        color: "#fff",
+                                    }}
+                                >
                                     {item}
                                 </Typography>
                             ))
@@ -85,22 +97,75 @@ export default function HomePage() {
                         )}
                     </Box>
 
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <IconButton color="inherit" sx={{ mr: 1 }}>
+                    {/* Right side: Icons */}
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <IconButton
+                            sx={{
+                                mr: 1,
+                                color: "#fff",
+                                "& .MuiSvgIcon-root": { fill: "#fff" },
+                            }}
+                        >
                             <SearchIcon />
                         </IconButton>
-                        <IconButton color="inherit" sx={{ mr: 1 }}>
+                        <IconButton
+                            sx={{
+                                mr: 1,
+                                color: "#fff",
+                                "& .MuiSvgIcon-root": { fill: "#fff" },
+                            }}
+                        >
                             <NotificationsIcon />
                         </IconButton>
-                        <IconButton color="inherit">
-                            <AccountCircleIcon />
-                        </IconButton>
-                    </Box>
+                        <Box>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    cursor: 'pointer',
+                                }}
+                                onClick={handleProfileClick}
+                            >
+                                <Box
+                                    component="img"
+                                    src="/assets/images/profile_pink.png"
+                                    alt="Profile"
+                                    sx={{
+                                        width: 32,
+                                        height: 32,
+                                        borderRadius: "4px",
+                                        objectFit: "cover",
+                                    }}
+                                />
+                                <Box
+                                    component="span"
+                                    sx={{
+                                        ml: 1,
+                                        fontSize: "12px",
+                                        color: "#fff",
+                                    }}
+                                >
+                                    ▼
+                                </Box>
+                            </Box>
 
+                            <Menu
+                                anchorEl={profileAnchorEl}
+                                open={Boolean(profileAnchorEl)}
+                                onClose={handleProfileClose}
+                                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                                transformOrigin={{ vertical: "top", horizontal: "right" }}
+                            >
+                                <MenuItem onClick={handleProfileClose}>Profile</MenuItem>
+                                <MenuItem onClick={handleProfileClose}>Account</MenuItem>
+                                <MenuItem onClick={handleProfileClose}>Help Center</MenuItem>
+                                <MenuItem onClick={handleProfileClose}>Sign Out</MenuItem>
+                            </Menu>
+                        </Box>
+
+                    </Box>
                 </Toolbar>
             </AppBar>
-
-            {/* Rest of your homepage content goes here */}
         </div>
     );
 }

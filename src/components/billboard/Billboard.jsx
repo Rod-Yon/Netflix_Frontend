@@ -67,12 +67,13 @@ export default function Billboard() {
                         Years after retiring from their formidable ninja lives, a dysfunctional family must return to shadowy missions to counteract a string of looming threats.
                     </Typography>
                     <Button
-                        variant="outlined"
-                        startIcon={<InfoOutlinedIcon sx={{ color: "#fff !important" }} />}
+                        // variant="outlined"
+                        startIcon={<InfoOutlinedIcon sx={{ color: "#fff !important", fontSize:"26px !important" }} />}
                         sx={{
                             color: "#fff !important", // ✅ Force MUI to use white for text and icon
-                            borderColor: "#fff",
+                            // borderColor: "#fff",
                             textTransform: "none",
+                            outline: "none",
                             fontWeight: "bold",
                             px: 2.5,
                             py: 0.8,
@@ -84,7 +85,7 @@ export default function Billboard() {
                             },
                             "&:hover": {
                               backgroundColor: "rgba(109,109,110,0.7)",
-                              borderColor: "#fff",
+                            //   borderColor: "#fff",
                             },
                           }}
                           
