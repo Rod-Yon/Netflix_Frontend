@@ -47,7 +47,7 @@ export default function HomePage() {
                     zIndex: 10,
                 }}
             >
-                <Toolbar sx={{ justifyContent: "space-between" }}>
+                <Toolbar sx={{ justifyContent: "space-between", px: { xs: 2, sm: 4, md: 8 } }}>
                     {/* Left side: Logo + nav */}
                     <Box sx={{ display: "flex", alignItems: "center" }}>
                         {/* Netflix logo */}

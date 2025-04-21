@@ -1,8 +1,10 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import MoreInfoModal from "../more_info_modal/More_Info_Modal";
 
 export default function Billboard() {
+    const [modalOpen, setModalOpen] = React.useState(false); // ✅ Modal state
     return (
         <Box
             sx={{
@@ -14,6 +16,7 @@ export default function Billboard() {
                 backgroundPosition: "center",
                 color: "#fff",
                 overflow: "hidden", // prevent content from pushing layout
+                pb: { xs: 6, sm: 8 }, // ✅ adds padding to make room for the button
             }}
         >
             {/* CONTENT WRAPPER: fills the Billboard space */}
@@ -27,13 +30,13 @@ export default function Billboard() {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
-                    px: { xs: 3, sm: 10 },
+                    px: { xs: 2, sm: 4, md: 8 },
                     py: { xs: 20, sm: 22 },
                     zIndex: 1,
                 }}
             >
                 {/* Netflix N logo + SERIES */}
-                <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+                <Box sx={{ display: "flex", alignItems: "center", mb: 1, mt: 10 }}>
                     <Box
                         sx={{
                             width: "30px",
@@ -68,7 +71,8 @@ export default function Billboard() {
                     </Typography>
                     <Button
                         // variant="outlined"
-                        startIcon={<InfoOutlinedIcon sx={{ color: "#fff !important", fontSize:"26px !important" }} />}
+                        onClick={() => setModalOpen(true)} // ✅ ADD THIS
+                        startIcon={<InfoOutlinedIcon sx={{ color: "#fff !important", fontSize: "26px !important" }} />}
                         sx={{
                             color: "#fff !important", // ✅ Force MUI to use white for text and icon
                             // borderColor: "#fff",
@@ -80,15 +84,15 @@ export default function Billboard() {
                             fontSize: "14px",
                             backgroundColor: "rgba(109,109,110,0.7)",
                             "& .MuiSvgIcon-root": {
-                              color: "#fff",         // ✅ Directly target the icon class
-                              fill: "#fff",          // ✅ Force white fill
+                                color: "#fff",         // ✅ Directly target the icon class
+                                fill: "#fff",          // ✅ Force white fill
                             },
                             "&:hover": {
-                              backgroundColor: "rgba(109,109,110,0.7)",
-                            //   borderColor: "#fff",
+                                backgroundColor: "rgba(109,109,110,0.7)",
+                                //   borderColor: "#fff",
                             },
-                          }}
-                          
+                        }}
+
                     >
                         More Info
                     </Button>
@@ -142,10 +146,9 @@ export default function Billboard() {
                         </Typography>
                     </Box>
                 </Box>
-
-
-
             </Box>
+            {/* ✅ The Modal floating on top */}
+            <MoreInfoModal open={modalOpen} onClose={() => setModalOpen(false)} />
         </Box>
     );
 }
