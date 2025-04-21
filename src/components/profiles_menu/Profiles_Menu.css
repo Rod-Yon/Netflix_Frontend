@@ -1,0 +1,58 @@
+.profiles_background {
+    width: 100vw;
+    height: 100vh;
+    background-color: #141414;
+}
+
+.profiles_wrapper {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profiles_row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 32px;
+    padding-right: 32px;
+    gap: 34px;
+}
+
+.profiles_title {
+    display: flex;
+    color: #FFF;
+    font-family: 'ABeeZee';
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.profiles_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.profiles_card {
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.profiles_name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #808080;
+    font-family: 'ABeeZee';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+}
