@@ -5,10 +5,6 @@ import './Selection_Menu.css'
 
 export default function LanguageSelector({ values }) {
 
-    const props = {
-        'value': '123'
-    };
-
     const [value, Set_Value] = useState(values[0]?.value || '');
 
     const Change_Value = (event) => {

@@ -48,7 +48,7 @@ export default function Footer_Transparent() {
                     </div>
                 </div>
                 <div className='links_row'>
-                    <SelectionMenu values={languages}/>
+                    <SelectionMenu values={languages} />
                 </div>
             </div>
         </div >

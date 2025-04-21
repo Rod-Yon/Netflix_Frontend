@@ -124,16 +124,78 @@
     background: #C11119;
 }
 
-.form_bottom_row {
+.forgotten_password {
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+    height: 20px;
+    justify-content: center;
     align-items: center;
-    font-size: 13px;
-    color: #b3b3b3;
 }
 
-.remember_me input {
-    margin-right: 5px;
+.forgotten_password a {
+    text-decoration: none;
+    color: #FFF;
+    font-family: 'ABeeZee';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.forgotten_password a:hover {
+    color: #8c8c8c;
+}
+
+.remember_me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.remember_me label {
+    color: #FFF;
+}
+
+.custom_checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #545454;
+    border-radius: 2px;
+    background-color: transparent;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+}
+
+.custom_checkbox:hover {
+    border: 1px solid white;
+}
+
+.custom_checkbox:checked {
+    background-color: white;
+    border-color: white;
+}
+
+.custom_checkbox:checked:hover {
+    background-color: rgba(255, 255, 255, 0.70);
+    border-color: rgba(255, 255, 255, 0.70);
+}
+
+.custom_checkbox:checked::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    width: 4px;
+    height: 8px;
+    border: solid #000;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
 }
 
 .help_link {
@@ -165,4 +227,18 @@
     color: #8c8c8c;
     margin-top: 10px;
     line-height: 1.4;
+}
+
+.learn_more {
+    text-decoration: none;
+    color: #0071EB;
+    font-family: "Netflix Sans";
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+.learn_more:hover {
+    color: #FFF;
 }

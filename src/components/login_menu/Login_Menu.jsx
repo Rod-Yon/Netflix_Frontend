@@ -11,6 +11,18 @@ export default function Login_Menu() {
     const [password, Set_Password] = useState('');
     const [password_error, Set_Password_Error] = useState('');
 
+    const [mode, Set_Mode] = useState(false);
+    const [information, Set_Information] = useState(false)
+
+    const Change_Mode = () => {
+        Set_Mode(!mode);
+        Set_Information(false);
+    }
+
+    const regex = (str) => {
+        return !(/[a-zA-Z]/.test(str) && /\d/.test(str));
+    };
+
     const Login_Validation = (input) => {
 
         const value = input.target.value;
@@ -30,8 +42,10 @@ export default function Login_Menu() {
 
         Set_Password(value);
 
-        if ((value.length < 4) || (value.length > 60)) {
-            Set_Password_Error('Your password must contain between 4 and 60 characters.');
+        if ((value.length < 8) || (value.length > 60)) {
+            Set_Password_Error('Your password must contain between 8 and 60 characters.');
+        } else if (regex(password)) {
+            Set_Password_Error('Your password must contain at least 1 letter and 1 number.');
         } else {
             Set_Password_Error('');
         }
@@ -45,8 +59,10 @@ export default function Login_Menu() {
             Set_Login_Error('Please enter a valid email or phone number.');
         }
 
-        if (!password || password.length < 4 || password.length > 60) {
-            Set_Password_Error('Your password must contain between 4 and 60 characters.');
+        if (!password || password.length < 8 || password.length > 60) {
+            Set_Password_Error('Your password must contain between 8 and 60 characters.');
+        } else if (regex(password)) {
+            Set_Password_Error('Your password must contain at least 1 letter and 1 number.');
         }
 
         if (!login_error && !password_error && login && password) {
@@ -57,7 +73,7 @@ export default function Login_Menu() {
     return (
         <div className='login_menu'>
             <div className='login_container'>
-                <div className='title'>Sign In</div>
+                <div className='title'>{!mode ? 'Sign In' : 'Sign Up'}</div>
                 <form onSubmit={(input) => { Send_Data(input) }} className='menu_container'>
                     <TextField
                         label='Email or phone number'
@@ -91,21 +107,43 @@ export default function Login_Menu() {
                             </div>)
                         }
                     />
-                    <input className='submit_button' type='submit' value='Sign In' />
-                    <div className="form_bottom_row">
-                        <label className="remember_me">
-                            <input type="checkbox" />Remember me
-                        </label>
-                        <a href="#" className="help_link">Need help?</a>
-                    </div>
+                    {mode && (
+                        <>
+                            <label className="remember_me">
+                                <input type="checkbox" className="custom_checkbox" />
+                                <span className="checkbox_label">Administrator</span>
+                            </label>
+                        </>
+                    )}
+                    <input className='submit_button' type='submit' value={!mode ? 'Sign In' : 'Sign Up'} />
+                    {!mode && (
+                        <>
+                            <div className='forgotten_password'>
+                                <a href="/" onClick={(action) => { action.preventDefault(); Change_Mode(); }}>Forgot Password?</a>
+                            </div>
+                            <label className="remember_me">
+                                <input type="checkbox" className="custom_checkbox" />
+                                <span className="checkbox_label">Remember me</span>
+                            </label>
+                        </>
+                    )}
                 </form>
-                <div className="signup_now">
-                    New to Netflix? <a href="/registration">Sign up now.</a>
-                </div>
+                {!mode && (
+                    <>
+                        <div className="signup_now">
+                            New to Netflix? <a href="/" onClick={(action) => { action.preventDefault(); Change_Mode(); }} >Sign up now.</a>
+                        </div>
+                    </>
+                )}
                 <div className="recaptcha_notice">
-                    This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#">Learn more.</a>
+                    This page is protected by Google reCAPTCHA to ensure you're not a bot. <a className='learn_more' href="/" onClick={(action) => { action.preventDefault(); Set_Information(true) }}>{information ? '' : 'Learn more.'}</a>
                 </div>
+                {information && (
+                    <div className="recaptcha_notice">
+                        The information collected by Google reCAPTCHA is subject to the Google <a className='learn_more' href='https://policies.google.com/privacy'>Privacy Policy</a> and <a className='learn_more' href='https://policies.google.com/terms'>Terms of Service</a>, and is used for providing, maintaining, and improving the reCAPTCHA service and for general security purposes (it is not used for personalized advertising by Google).
+                    </div>
+                )}
             </div>
-        </div>
+        </div >
     );
 };
