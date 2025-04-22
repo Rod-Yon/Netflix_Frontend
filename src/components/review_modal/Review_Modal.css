@@ -1,0 +1,16 @@
+/* ✅ Yellow filled stars */
+.review-rating .MuiRating-iconFilled path {
+    fill: #fbc02d !important;
+    /* Yellow */
+}
+
+/* ✅ Yellow on hover */
+.review-rating .MuiRating-iconHover path {
+    fill: #fbc02d !important;
+}
+
+/* Make stars bigger */
+.review-rating .MuiSvgIcon-root {
+    font-size: 22px !important;
+    /* Adjust to your preference */
+}
