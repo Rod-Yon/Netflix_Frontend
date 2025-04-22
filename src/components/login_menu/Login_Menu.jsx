@@ -3,6 +3,8 @@ import TextField from '@mui/material/TextField';
 
 import './Login_Menu.css';
 
+const api_url = 'http://localhost:8080';
+
 export default function Login_Menu() {
 
     const [login, Set_Login] = useState('');
@@ -11,8 +13,13 @@ export default function Login_Menu() {
     const [password, Set_Password] = useState('');
     const [password_error, Set_Password_Error] = useState('');
 
+    const [cookie, Set_Cookie] = useState(0);
+    const [role, Set_Role] = useState('User');
+
     const [mode, Set_Mode] = useState(false);
     const [information, Set_Information] = useState(false)
+
+    const [authorization_error, Set_Authorization_Error] = useState('');
 
     const Change_Mode = () => {
         Set_Mode(!mode);
@@ -51,7 +58,7 @@ export default function Login_Menu() {
         }
     };
 
-    const Send_Data = (input) => {
+    const Send_Data = async (input) => {
 
         input.preventDefault();
 
@@ -66,7 +73,26 @@ export default function Login_Menu() {
         }
 
         if (!login_error && !password_error && login && password) {
-            console.log('Sending data:', { login, password });
+            
+            const res = await fetch(`${api_url}/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ username: login, password, cookie, role, mode}),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+
+                if (!cookie && data.token) {
+                  localStorage.setItem('token', data.token);
+                }
+                window.location.href = '/profile';
+
+              } else {
+                alert(data.message || 'Authorization Error');
+              }
         }
     };
 
@@ -110,7 +136,13 @@ export default function Login_Menu() {
                     {mode && (
                         <>
                             <label className="remember_me">
-                                <input type="checkbox" className="custom_checkbox" />
+                                <input type="checkbox" className="custom_checkbox" onChange={() => {
+                                    if (role == 'User') {
+                                        Set_Role('Admin')
+                                    } else {
+                                        Set_Role('User')
+                                    }
+                                }} />
                                 <span className="checkbox_label">Administrator</span>
                             </label>
                         </>
@@ -122,7 +154,7 @@ export default function Login_Menu() {
                                 <a href="/" onClick={(action) => { action.preventDefault(); Change_Mode(); }}>Forgot Password?</a>
                             </div>
                             <label className="remember_me">
-                                <input type="checkbox" className="custom_checkbox" />
+                                <input type="checkbox" className="custom_checkbox" onChange={() => Set_Cookie((value) => !value)} />
                                 <span className="checkbox_label">Remember me</span>
                             </label>
                         </>
