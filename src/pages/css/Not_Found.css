@@ -1,0 +1,41 @@
+.not_found_background {
+    width: 100vw;
+    height: 100vh;
+    background-color: #141414;
+}
+
+.not_found_wrapper {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.not_found_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 32px;
+    padding-right: 32px;
+    gap: 34px;
+}
+
+.not_found_link {
+    width: 25%;
+}
+
+.not_found_netflix_logo {
+    height: 100%;
+    width: 100%;
+}
+
+.not_found_text {
+    color: #FFF;
+    font-family: "Netflix Sans";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 40px;
+}
