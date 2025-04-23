@@ -8,6 +8,8 @@ import Movies from '../../pages/Movies';
 import TVshows from '../../pages/TVshows';
 import NewAndPopular from '../../pages/NewAndPopular';
 import MyList from '../../pages/MyList';
+import Browse from '../../pages/Browse';
+
 
 import './App.css';
 
@@ -22,6 +24,7 @@ export default function App() {
         <Route path='/TVshows' element={<TVshows />} />
         <Route path='/newandpopular' element={<NewAndPopular />} />
         <Route path='/mylist' element={<MyList />} />
+        <Route path='/browse' element={<Browse />} />
       </Routes>
     </Router>
   );
