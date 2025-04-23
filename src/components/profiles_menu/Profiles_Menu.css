@@ -40,9 +40,44 @@
 }
 
 .profiles_card {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 12px;
+}
+
+.profiles_avatar {
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    transition: border 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.profiles_avatar:hover {
+    border: 2px solid #e50914;
+    transform: scale(1.05);
+}
+
+.profiles_input {
+    display: flex;
+    font-size: 18px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #141414;
+    color: white;
+    border-bottom: 2px solid #444;
+    outline: none;
+    width: 100%;
+    max-width: 120px;
+    transition: border-color 0.2s ease;
+    cursor: pointer;
+}
+
+.profiles_input:focus {
+    border-bottom: 2px solid #e50914;
 }
 
 .profiles_name {
@@ -55,4 +90,10 @@
     font-style: normal;
     font-weight: 400;
     line-height: 22px;
+}
+
+.error_element {
+    color: #ff4d4f;
+    font-size: 14px;
+    margin-top: 8px;
 }
