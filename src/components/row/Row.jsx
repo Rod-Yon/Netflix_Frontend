@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 
-export default function Row({ title, disableTopMargin = false }) {
+export default function Row({ title, filter = "all", disableTopMargin = false }) {
     const dummyItems = Array.from({ length: 10 });
 
     return (
