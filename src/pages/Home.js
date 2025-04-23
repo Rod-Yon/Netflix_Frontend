@@ -11,7 +11,7 @@ export default function HomePage() {
 
   return (
     <Box sx={{ position: "relative", backgroundColor: "#000", minHeight: "100vh" }}>
-      <Header />
+      <Header activePage="Home"/>
       <Billboard />
       <Row title="Top Picks for You" disableTopMargin/>
       <Row title="New on Netflix" />

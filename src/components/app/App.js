@@ -5,6 +5,11 @@ import Login from '../../pages/Login';
 import Profile from '../../pages/Profile';
 import Home from '../../pages/Home';
 import NotFound from '../../pages/Not_Found';
+import Movies from '../../pages/Movies';
+import TVshows from '../../pages/TVshows';
+import NewAndPopular from '../../pages/NewAndPopular';
+import MyList from '../../pages/MyList';
+import Browse from '../../pages/Browse';
 
 import './App.css';
 
@@ -12,7 +17,12 @@ export default function App() {
 
   const protected_routes = [
     { path: '/profile', element: <Profile /> },
-    { path: '/home', element: <Home /> }
+    { path: '/home', element: <Home /> },
+    { path: '/movies', element: <Movies /> },
+    { path: '/TVshows', element: <TVshows /> },
+    { path: '/newandpopular', element: <NewAndPopular /> },
+    { path: '/mylist', element: <MyList /> },
+    { path: '/browse', element: <Browse /> }
   ];
 
   const authorization_check = () => {

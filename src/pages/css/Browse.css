@@ -1,0 +1,12 @@
+/* Browse.css */
+
+.MuiPaper-root.MuiMenu-paper {
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  .MuiPaper-root.MuiMenu-paper .MuiMenuItem-root {
+    color: black !important;
+    font-family: 'Netflix Sans', sans-serif;
+  }
+  

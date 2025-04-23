@@ -16,7 +16,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useTheme } from "@mui/material/styles";
 
 
-export default function HomePage() {
+export default function Header({ activePage }) {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -73,7 +73,7 @@ export default function HomePage() {
                                         cursor: "pointer",
                                         fontFamily:
                                             item === "Browse" ? "ABeeZee, sans-serif" : "Netflix Sans, sans-serif",
-                                        fontWeight: item === "Home" ? "bold" : 400,
+                                        fontWeight: item === activePage ? "bold" : 400,
                                         fontSize: item === "Browse" ? "16px" : "14px",
                                         color: "#fff",
                                     }}
