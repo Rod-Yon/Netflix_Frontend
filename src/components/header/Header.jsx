@@ -13,7 +13,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 // import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { useTheme } from "@mui/material/styles";
 
 const api_url = 'http://localhost:8080';
@@ -160,7 +160,7 @@ export default function Header({ activePage }) {
                                 "& .MuiSvgIcon-root": { fill: "#fff" },
                             }}
                         >
-                            <NotificationsIcon />
+                            <NotificationsNoneIcon />
                         </IconButton>
                         <Box>
                             <Box
