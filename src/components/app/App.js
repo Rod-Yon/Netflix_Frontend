@@ -10,6 +10,7 @@ import TVshows from '../../pages/TVshows';
 import NewAndPopular from '../../pages/NewAndPopular';
 import MyList from '../../pages/MyList';
 import Browse from '../../pages/Browse';
+import AdminPage from '../../pages/Admin';
 
 import './App.css';
 
@@ -22,7 +23,8 @@ export default function App() {
     { path: '/TVshows', element: <TVshows /> },
     { path: '/newandpopular', element: <NewAndPopular /> },
     { path: '/mylist', element: <MyList /> },
-    { path: '/browse', element: <Browse /> }
+    { path: '/browse', element: <Browse /> },
+    { path: '/admin', element: <AdminPage /> } 
   ];
 
   const authorization_check = () => {

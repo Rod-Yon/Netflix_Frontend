@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 
 export default function Row({ title, filter = "all", disableTopMargin = false, data = [], onProgramClick }) {
-    const dummyItems = Array.from({ length: 10 });
+    // const dummyItems = Array.from({ length: 10 });
 
     return (
         <Box sx={{
@@ -51,7 +51,7 @@ export default function Row({ title, filter = "all", disableTopMargin = false, d
                             minWidth: 218,
                             height: 123,
                             borderRadius: "4px",
-                            backgroundImage: `url(${program.image || "/assets/images/taylor_placeholder.png"})`,
+                            backgroundImage: `url(https://image.tmdb.org/t/p/w500${program.main_info.poster_path || "/assets/images/taylor_placeholder.png"})`,
                             backgroundSize: "cover",
                             backgroundPosition: "center",
                             backgroundRepeat: "no-repeat",

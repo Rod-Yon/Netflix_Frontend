@@ -1,27 +1,70 @@
 // pages/HomePage.jsx
-import React from "react";
-import Header from "../components/header/Header"
+import React, { useEffect, useState } from 'react';
+import Header from "../components/header/Header";
 import Billboard from "../components/billboard/Billboard";
 import Footer from "../components/footer_homepage/Footer_Homepage";
 import Row from "../components/row/Row";
+import MoreInfoModal from "../components/more_info_modal/More_Info_Modal";
 import { Box } from "@mui/material";
+const api_url = 'http://localhost:8080/';
 
 export default function HomePage() {
+  const [modalOpen, setModalOpen] = useState(false);       // modal visibility
+  const [selectedProgram, setSelectedProgram] = useState(null); // clicked program data
+  const [media_data, Set_Media_Data] = React.useState([]);
 
+
+  const get_most_popular = async () => {
+
+    try {
+
+        const profile_id = localStorage.getItem('profile_id');
+
+        const response = await fetch(`${api_url}home/${profile_id}/top`);
+
+        if (!response.ok) throw new Error('Failed to fetch most popular');
+
+        const data = await response.json();
+
+        Set_Media_Data(data);
+        console.log(data);
+
+    } catch (error) {
+
+        alert(`Error fetching most popular: ${error}`);
+    }
+};
+
+  // Function to be passed to Row to handle thumbnail clicks
+  const handleProgramClick = (program) => {
+    setSelectedProgram(program);
+    setModalOpen(true);
+  };
+  useEffect(() => { get_most_popular(); }, []);
 
   return (
     <Box sx={{ position: "relative", backgroundColor: "#000", minHeight: "100vh" }}>
-      <Header activePage="Home"/>
+      <Header activePage="Home" />
       <Billboard />
-      <Row title="Top Picks for You" disableTopMargin/>
-      <Row title="New on Netflix" />
-      <Row title="Top 10 in Israel this Week" />
-      <Row title="Your Reviews" />
-      <Row title="Popular Shows" />
-      <Row title="Animation" />
-      <Row title="Sci-Fi" />
-      <Row title="Watchlist" />
+
+      {/* Pass onProgramClick to each row */}
+      <Row title="Top Picks for You" disableTopMargin onProgramClick={handleProgramClick} />
+      <Row title="New on Netflix" onProgramClick={handleProgramClick} />
+      <Row title="Top 10 in Israel this Week" onProgramClick={handleProgramClick} data={media_data} />
+      <Row title="Your Reviews" onProgramClick={handleProgramClick} />
+      <Row title="Popular Shows" onProgramClick={handleProgramClick} />
+      <Row title="Animation" onProgramClick={handleProgramClick} />
+      <Row title="Sci-Fi" onProgramClick={handleProgramClick} />
+      <Row title="Watchlist" onProgramClick={handleProgramClick} />
+
       <Footer />
+
+      {/* Global Modal */}
+      <MoreInfoModal
+        open={modalOpen}
+        program={selectedProgram}
+        onClose={() => setModalOpen(false)}
+      />
     </Box>
   );
 }

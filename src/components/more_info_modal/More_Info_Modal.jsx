@@ -9,46 +9,14 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow"; // ✅ ADD this import at the top
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import Episode from "../episode/Episode";
 import ReviewModal from "../review_modal/Review_Modal";
 
-export default function MoreInfoModal({ open, onClose }) {
-
-    const program = {
-
-        title: "HOUSE OF NINJAS",
-        description:
-            "Years after retiring from their formidable ninja lives, a dysfunctional family must return to shadowy missions to counteract a string of looming threats.",
-        images: [
-            "/assets/images/house_of_ninjas.png",
-            "/assets/images/house_of_ninjas.png",
-            "/assets/images/house_of_ninjas.png",
-        ],
-        cast: "Joe Shimo, Jane Kuno, Bob Sensei",
-        episodes: [
-            {
-                title: "The Return",
-                description: "The family faces a new threat in the shadows.",
-                thumbnail: "/assets/images/house_of_ninjas.png",
-                isCurrent: true, // ✅ highlighted
-            },
-            {
-                title: "Shadow Moves",
-                description: "A mission gets personal for one of the ninjas.",
-                thumbnail: "/assets/images/house_of_ninjas.png",
-                isCurrent: false,
-            },
-            {
-                title: "Final Blade",
-                description: "A final confrontation puts everything at risk.",
-                thumbnail: "/assets/images/house_of_ninjas.png",
-                isCurrent: false,
-            },
-        ],
-    };
-
+export default function MoreInfoModal({ open, onClose, program }) {
     const [reviewOpen, setReviewOpen] = React.useState(false);
+
+    if (!program) return null;
 
     return (
         <>
@@ -58,17 +26,17 @@ export default function MoreInfoModal({ open, onClose }) {
                         backgroundColor: "#141414",
                         color: "#fff",
                         p: 0,
-                        overflowX: "hidden", // ✅ no horizontal scroll
+                        overflowX: "hidden",
                     }}
                 >
                     {/* Billboard Top Section */}
                     <Box
                         sx={{
                             position: "relative",
-                            width: "850px",             // ✅ Figma width
-                            height: "480px",            // ✅ Figma height
-                            maxWidth: "100%",           // ✅ responsive fallback
-                            backgroundImage: `url('/assets/images/house_of_ninjas.png')`,
+                            width: "850px",
+                            height: "480px",
+                            maxWidth: "100%",
+                            backgroundImage: `url(https://image.tmdb.org/t/p/w500${program.main_info.poster_path || "/assets/images/house_of_ninjas.png"})`,
                             backgroundSize: "cover",
                             backgroundPosition: "center",
                             px: { xs: 3, sm: 6 },
@@ -76,7 +44,7 @@ export default function MoreInfoModal({ open, onClose }) {
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "flex-end",
-                            margin: "0 auto",           // ✅ center horizontally
+                            margin: "0 auto",
                         }}
                     >
                         <IconButton
@@ -99,7 +67,7 @@ export default function MoreInfoModal({ open, onClose }) {
                                 }}
                             />
                             <Typography variant="h6" sx={{ fontWeight: "bold", color: "#7f8c8d" }}>
-                                SERIES
+                                {program.type?.toUpperCase() || "PROGRAM"}
                             </Typography>
                         </Box>
 
@@ -117,14 +85,13 @@ export default function MoreInfoModal({ open, onClose }) {
                         </Typography>
 
                         <Box sx={{ display: "flex", gap: 2 }}>
-                            {/* Review Button (with Play icon) */}
                             <Button
                                 startIcon={<PlayArrowIcon sx={{ width: "21px", height: "24px", color: "#000 !important" }} />}
                                 sx={{
                                     backgroundColor: "#fff",
                                     color: "#000",
                                     fontWeight: "400",
-                                    fontFamily: "ABeeZee, sans-serif", // ✅ Figma font
+                                    fontFamily: "ABeeZee, sans-serif",
                                     textTransform: "none",
                                     borderRadius: "6px",
                                     px: 2.5,
@@ -134,12 +101,11 @@ export default function MoreInfoModal({ open, onClose }) {
                                         backgroundColor: "#e6e6e6",
                                     },
                                 }}
-                                onClick={() => setReviewOpen(true)} // <-- OPEN MODAL
+                                onClick={() => setReviewOpen(true)}
                             >
                                 Review
                             </Button>
 
-                            {/* Add (+) Button with white icon */}
                             <IconButton
                                 sx={{
                                     width: 40,
@@ -155,79 +121,79 @@ export default function MoreInfoModal({ open, onClose }) {
                                 <AddIcon sx={{ color: "#fff !important" }} />
                             </IconButton>
                         </Box>
-
                     </Box>
 
                     {/* Content Below */}
                     <Box sx={{ px: { xs: 3, sm: 6 }, pt: 4, pb: 2 }}>
                         <Typography sx={{ mb: 3, fontSize: "16px" }}>{program.description}</Typography>
 
-                        {/* Episodes */}
-                        <Box sx={{ mb: 4 }}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    alignItems: "center",
-                                    mb: 2,
-                                }}
-                            >
-                                <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-                                    Episodes
-                                </Typography>
-                                <Typography
+                        {program.episodes?.length > 0 && (
+                            <Box sx={{ mb: 4 }}>
+                                <Box
                                     sx={{
-                                        fontFamily: "ABeeZee, sans-serif",
-                                        fontSize: "14px",
-                                        color: "#fff",
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        alignItems: "center",
+                                        mb: 2,
                                     }}
                                 >
-                                    {program.title}
-                                </Typography>
+                                    <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+                                        Episodes
+                                    </Typography>
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "ABeeZee, sans-serif",
+                                            fontSize: "14px",
+                                            color: "#fff",
+                                        }}
+                                    >
+                                        {program.title}
+                                    </Typography>
+                                </Box>
+
+                                {program.episodes.map((ep, i) => (
+                                    <Episode
+                                        key={i}
+                                        index={i}
+                                        title={ep.title}
+                                        description={ep.description}
+                                        duration={ep.duration || "52m"}
+                                        thumbnail={ep.thumbnail}
+                                        isCurrent={ep.isCurrent}
+                                    />
+                                ))}
                             </Box>
+                        )}
 
-                            {program.episodes.map((ep, i) => (
-                                <Episode
-                                    key={i}
-                                    index={i}
-                                    title={ep.title}
-                                    description={ep.description}
-                                    duration={ep.duration || "52m"} // optional: if you add durations later
-                                    thumbnail={ep.thumbnail}
-                                    isCurrent={ep.isCurrent}
-                                />
-                            ))}
-                        </Box>
+                        {program.images?.length > 0 && (
+                            <Box sx={{ display: "flex", gap: 2, mb: 4, flexWrap: "wrap" }}>
+                                {program.images.map((url, i) => (
+                                    <Box
+                                        key={i}
+                                        sx={{
+                                            width: "32%",
+                                            height: 150,
+                                            backgroundImage: `url(${url})`,
+                                            backgroundSize: "cover",
+                                            backgroundPosition: "center",
+                                            borderRadius: 2,
+                                        }}
+                                    />
+                                ))}
+                            </Box>
+                        )}
 
-                        {/* Preview Images */}
-                        <Box sx={{ display: "flex", gap: 2, mb: 4, flexWrap: "wrap" }}>
-                            {program.images.map((url, i) => (
-                                <Box
-                                    key={i}
-                                    sx={{
-                                        width: "32%",
-                                        height: 150,
-                                        backgroundImage: `url(${url})`,
-                                        backgroundSize: "cover",
-                                        backgroundPosition: "center",
-                                        borderRadius: 2,
-                                    }}
-                                />
-                            ))}
-                        </Box>
-
-                        {/* Cast */}
-                        <Typography sx={{ fontSize: "14px", color: "#fff" }}>
-                            <Box component="span" sx={{ color: "#888", fontWeight: 400 }}>
-                                Cast:
-                            </Box>{" "}
-                            {program.cast}
-                        </Typography>
-
+                        {program.cast && (
+                            <Typography sx={{ fontSize: "14px", color: "#fff" }}>
+                                <Box component="span" sx={{ color: "#888", fontWeight: 400 }}>
+                                    Cast:
+                                </Box>{" "}
+                                {program.cast}
+                            </Typography>
+                        )}
                     </Box>
                 </DialogContent>
             </Dialog>
-            {/* ✅ Place ReviewModal after Dialog inside fragment */}
             <ReviewModal open={reviewOpen} onClose={() => setReviewOpen(false)} />
         </>
     );
