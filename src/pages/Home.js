@@ -29,10 +29,10 @@ export default function HomePage() {
 
       Set_Animation(data);
 
-  } catch (error) {
+    } catch (error) {
 
       alert(`Error fetching animation: ${error}`);
-  }
+    }
 
   };
 
@@ -50,10 +50,10 @@ export default function HomePage() {
 
       Set_Drama(data);
 
-  } catch (error) {
+    } catch (error) {
 
       alert(`Error fetching drama: ${error}`);
-  }
+    }
 
   };
 
@@ -61,29 +61,29 @@ export default function HomePage() {
 
     try {
 
-        const profile_id = localStorage.getItem('profile_id');
+      const profile_id = localStorage.getItem('profile_id');
 
-        const response = await fetch(`${api_url}home/${profile_id}/top`);
+      const response = await fetch(`${api_url}home/${profile_id}/top`);
 
-        if (!response.ok) throw new Error('Failed to fetch most popular');
+      if (!response.ok) throw new Error('Failed to fetch most popular');
 
-        const data = await response.json();
+      const data = await response.json();
 
-        Set_Media_Data(data);
+      Set_Media_Data(data);
 
     } catch (error) {
 
-        alert(`Error fetching most popular: ${error}`);
+      alert(`Error fetching most popular: ${error}`);
     }
-};
+  };
 
   // Function to be passed to Row to handle thumbnail clicks
   const handleProgramClick = (program) => {
     setSelectedProgram(program);
     setModalOpen(true);
   };
-  useEffect(() => { 
-    get_most_popular(); 
+  useEffect(() => {
+    get_most_popular();
     get_animation();
     get_drama();
   }, []);
@@ -100,7 +100,7 @@ export default function HomePage() {
       <Row title="Your Reviews" onProgramClick={handleProgramClick} />
       <Row title="Popular Shows" onProgramClick={handleProgramClick} />
       <Row title="Animation" onProgramClick={handleProgramClick} data={animation} />
-      <Row title="Drama" onProgramClick={handleProgramClick} data={drama}/>
+      <Row title="Drama" onProgramClick={handleProgramClick} data={drama} />
       <Row title="Watchlist" onProgramClick={handleProgramClick} />
 
       <Footer />
