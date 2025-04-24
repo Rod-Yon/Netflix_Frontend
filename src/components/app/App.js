@@ -17,7 +17,7 @@ export default function App() {
 
   const protected_routes = [
     { path: '/profile', element: <Profile /> },
-    { path: '/home', element: <Home /> },
+    { path: '/home/:id', element: <Home /> },
     { path: '/movies', element: <Movies /> },
     { path: '/TVshows', element: <TVshows /> },
     { path: '/newandpopular', element: <NewAndPopular /> },

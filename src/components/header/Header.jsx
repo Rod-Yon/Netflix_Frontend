@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import {
     AppBar,
     Toolbar,
@@ -15,6 +15,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useTheme } from "@mui/material/styles";
 
+const api_url = 'http://localhost:8080';
 
 export default function Header({ activePage }) {
     const theme = useTheme();
@@ -27,7 +28,34 @@ export default function Header({ activePage }) {
     const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
     const handleMenuClose = () => setAnchorEl(null);
 
+    const [profile_picture, Set_New_Profile_Picture] = useState('')
+
+    let profile;
+
+    const get_profile = async () => {
+
+        try {
+
+            const profile_id = localStorage.getItem('profile_id');
+
+            const response = await fetch(`${api_url}/profiles/id/${profile_id}`);
+
+            if (!response.ok) throw new Error('Failed to find profile');
+
+            profile = await response.json();
+
+            Set_New_Profile_Picture(profile.avatar);
+
+        } catch (error) {
+
+            alert(`Error fetching profile: ${error}`);
+        }
+
+    };
+
     const navItems = ["Home", "TV Shows", "Movies", "New & Popular", "My List", "Browse"];
+
+    useEffect(() => { get_profile(); }, []);
 
     return (
         <div
@@ -126,17 +154,21 @@ export default function Header({ activePage }) {
                                 }}
                                 onClick={handleProfileClick}
                             >
-                                <Box
-                                    component="img"
-                                    src="/assets/images/profile_pink.png"
-                                    alt="Profile"
-                                    sx={{
-                                        width: 32,
-                                        height: 32,
-                                        borderRadius: "4px",
-                                        objectFit: "cover",
-                                    }}
-                                />
+                                {profile_picture && (
+                                    <Box
+                                        component="img"
+                                        src={`/assets/avatars/${profile_picture}.png`}
+                                        alt="Profile"
+                                        sx={{
+                                            width: 32,
+                                            height: 32,
+                                            borderRadius: "4px",
+                                            objectFit: "cover",
+                                            opacity: 1,
+                                            transition: 'opacity 0.5s ease-in-out',
+                                        }}
+                                    />
+                                )}
                                 <Box
                                     component="span"
                                     sx={{

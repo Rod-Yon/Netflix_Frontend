@@ -83,7 +83,8 @@ export default function Profile() {
     };
 
     const redirect_page = (profile_id) => {
-
+        
+        localStorage.setItem('profile_id', profile_id);
         navigate(`/home/${profile_id}`);
     };
 
