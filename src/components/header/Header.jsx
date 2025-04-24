@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
     AppBar,
     Toolbar,
@@ -28,9 +29,12 @@ export default function Header({ activePage }) {
     const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
     const handleMenuClose = () => setAnchorEl(null);
 
-    const [profile_picture, Set_New_Profile_Picture] = useState('')
+    const [profile_picture, Set_New_Profile_Picture] = useState('');
+    const [profile_id, Set_New_Profile_id] = useState('');
+
 
     let profile;
+    let home_path = `/home/${profile_id}`;
 
     const get_profile = async () => {
 
@@ -45,6 +49,7 @@ export default function Header({ activePage }) {
             profile = await response.json();
 
             Set_New_Profile_Picture(profile.avatar);
+            Set_New_Profile_id(profile.profile_id);
 
         } catch (error) {
 
@@ -53,7 +58,14 @@ export default function Header({ activePage }) {
 
     };
 
-    const navItems = ["Home", "TV Shows", "Movies", "New & Popular", "My List", "Browse"];
+    const navItems = [
+        { label: "Home", path: `/home/${profile_id}` },
+        { label: "TV Shows", path: "/TVshows" },
+        { label: "Movies", path: "/movies" },
+        { label: "New & Popular", path: "/newandpopular" },
+        { label: "My List", path: "/mylist" },
+        { label: "Browse", path: "/browse" },
+    ];
 
     useEffect(() => { get_profile(); }, []);
 
@@ -79,47 +91,52 @@ export default function Header({ activePage }) {
                     {/* Left side: Logo + nav */}
                     <Box sx={{ display: "flex", alignItems: "center" }}>
                         {/* Netflix logo */}
-                        <Box
-                            sx={{
-                                width: 80,
-                                height: 24,
-                                backgroundImage: `url(/assets/images/netfilx_logo.png)`,
-                                backgroundSize: "contain",
-                                backgroundRepeat: "no-repeat",
-                                backgroundPosition: "left",
-                                mr: 4,
-                            }}
-                        />
+                        <Link to= {home_path} style={{ textDecoration: "none" }}>
+                            <Box
+                                sx={{
+                                    width: 80,
+                                    height: 24,
+                                    backgroundImage: `url(/assets/images/netfilx_logo.png)`,
+                                    backgroundSize: "contain",
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundPosition: "left",
+                                    mr: 4,
+                                    cursor: "pointer",
+                                }}
+                            />
+                        </Link>
 
                         {/* Desktop nav */}
                         {!isMobile ? (
-                            navItems.map((item) => (
-                                <Typography
-                                    key={item}
-                                    sx={{
-                                        mr: 2,
-                                        cursor: "pointer",
-                                        fontFamily:
-                                            item === "Browse" ? "ABeeZee, sans-serif" : "Netflix Sans, sans-serif",
-                                        fontWeight: item === activePage ? "bold" : 400,
-                                        fontSize: item === "Browse" ? "16px" : "14px",
-                                        color: "#fff",
-                                    }}
-                                >
-                                    {item}
-                                </Typography>
+                            navItems.map(({ label, path }) => (
+                                <Link to={path} key={label} style={{ textDecoration: 'none' }}>
+                                    <Typography
+                                        sx={{
+                                            mr: 2,
+                                            cursor: "pointer",
+                                            fontFamily: label === "Browse" ? "ABeeZee, sans-serif" : "Netflix Sans, sans-serif",
+                                            fontWeight: label === activePage ? "bold" : 400,
+                                            fontSize: label === "Browse" ? "16px" : "14px",
+                                            color: "#fff",
+                                        }}
+                                    >
+                                        {label}
+                                    </Typography>
+                                </Link>
                             ))
+
                         ) : (
                             <>
                                 <IconButton color="inherit" onClick={handleMenuOpen}>
                                     <MenuIcon />
                                 </IconButton>
                                 <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-                                    {navItems.map((item) => (
-                                        <MenuItem key={item} onClick={handleMenuClose}>
-                                            {item}
+                                    {navItems.map(({ label, path }) => (
+                                        <MenuItem key={label} onClick={handleMenuClose} component={Link} to={path}>
+                                            {label}
                                         </MenuItem>
                                     ))}
+
                                 </Menu>
                             </>
                         )}
