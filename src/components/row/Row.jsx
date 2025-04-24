@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 
-export default function Row({ title, filter = "all", disableTopMargin = false }) {
+export default function Row({ title, filter = "all", disableTopMargin = false, data = [], onProgramClick }) {
     const dummyItems = Array.from({ length: 10 });
 
     return (
@@ -42,21 +42,28 @@ export default function Row({ title, filter = "all", disableTopMargin = false })
                     display: "none", // Chrome, Safari
                 },
             }}>
-                {dummyItems.map((_, i) => (
+                {data.map((program, i) => (
                     <Box
-                        key={i}
+                        key={program._id || i}
+                        onClick={() => onProgramClick?.(program)} // ✅ trigger modal
                         sx={{
                             flexShrink: 0,
                             minWidth: 218,
                             height: 123,
                             borderRadius: "4px",
-                            backgroundImage: `url('/assets/images/taylor_placeholder.png')`, // ✅ fixed image
+                            backgroundImage: `url(${program.image || "/assets/images/taylor_placeholder.png"})`,
                             backgroundSize: "cover",
                             backgroundPosition: "center",
                             backgroundRepeat: "no-repeat",
+                            cursor: "pointer",
+                            transition: 'transform 0.3s',
+                            '&:hover': {
+                                transform: 'scale(1.08)',
+                            },
                         }}
                     />
                 ))}
+
             </Box>
         </Box>
     );
