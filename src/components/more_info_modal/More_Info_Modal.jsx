@@ -36,7 +36,7 @@ export default function MoreInfoModal({ open, onClose, program }) {
                             width: "850px",
                             height: "480px",
                             maxWidth: "100%",
-                            backgroundImage: `url(https://image.tmdb.org/t/p/w500${program.main_info.poster_path || "/assets/images/house_of_ninjas.png"})`,
+                            backgroundImage: `url(https://image.tmdb.org/t/p/w500${program.main_info.poster_path})` || "/assets/images/house_of_ninjas.png",
                             backgroundSize: "cover",
                             backgroundPosition: "center",
                             px: { xs: 3, sm: 6 },
@@ -81,8 +81,9 @@ export default function MoreInfoModal({ open, onClose, program }) {
                                 lineHeight: 1.2,
                             }}
                         >
-                            {program.title}
+                            {program.main_info.title || program.main_info.original_name}
                         </Typography>
+
 
                         <Box sx={{ display: "flex", gap: 2 }}>
                             <Button
@@ -125,9 +126,9 @@ export default function MoreInfoModal({ open, onClose, program }) {
 
                     {/* Content Below */}
                     <Box sx={{ px: { xs: 3, sm: 6 }, pt: 4, pb: 2 }}>
-                        <Typography sx={{ mb: 3, fontSize: "16px" }}>{program.description}</Typography>
-
-                        {program.episodes?.length > 0 && (
+                        <Typography sx={{ mb: 3, fontSize: "16px" }}>{program.main_info.overview}</Typography>
+                        
+                        {program.episodes.episodes?.length > 0 && (
                             <Box sx={{ mb: 4 }}>
                                 <Box
                                     sx={{
@@ -147,21 +148,28 @@ export default function MoreInfoModal({ open, onClose, program }) {
                                             color: "#fff",
                                         }}
                                     >
-                                        {program.title}
+                                        {program.main_info.original_name}
                                     </Typography>
                                 </Box>
 
-                                {program.episodes.map((ep, i) => (
-                                    <Episode
-                                        key={i}
-                                        index={i}
-                                        title={ep.title}
-                                        description={ep.description}
-                                        duration={ep.duration || "52m"}
-                                        thumbnail={ep.thumbnail}
-                                        isCurrent={ep.isCurrent}
-                                    />
-                                ))}
+
+                                {program.episodes.episodes.map((ep, i) => {
+                                    return (
+                                        <Episode
+                                            key={i}
+                                            index={i}
+                                            title={ep.name}
+                                            description={ep.overview || "No Description"}
+                                            duration={ep.runtime || "0m"}
+                                            thumbnail={
+                                                ep.still_path
+                                                    ? `https://image.tmdb.org/t/p/w500${ep.still_path}`
+                                                    : `/assets/images/placeholder_episode.png`
+                                            }
+                                            isCurrent={ep.isCurrent}
+                                        />
+                                    );
+                                })}
                             </Box>
                         )}
 

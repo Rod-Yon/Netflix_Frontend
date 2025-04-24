@@ -12,7 +12,50 @@ export default function HomePage() {
   const [modalOpen, setModalOpen] = useState(false);       // modal visibility
   const [selectedProgram, setSelectedProgram] = useState(null); // clicked program data
   const [media_data, Set_Media_Data] = React.useState([]);
+  const [animation, Set_Animation] = React.useState([]);
+  const [drama, Set_Drama] = React.useState([]);
 
+  const get_animation = async () => {
+
+    try {
+
+      const profile_id = localStorage.getItem('profile_id');
+
+      const response = await fetch(`${api_url}home/${profile_id}/genre/Animation`);
+
+      if (!response.ok) throw new Error('Failed to fetch animation');
+
+      const data = await response.json();
+
+      Set_Animation(data);
+
+  } catch (error) {
+
+      alert(`Error fetching animation: ${error}`);
+  }
+
+  };
+
+  const get_drama = async () => {
+
+    try {
+
+      const profile_id = localStorage.getItem('profile_id');
+
+      const response = await fetch(`${api_url}home/${profile_id}/genre/drama`);
+
+      if (!response.ok) throw new Error('Failed to fetch drama');
+
+      const data = await response.json();
+
+      Set_Drama(data);
+
+  } catch (error) {
+
+      alert(`Error fetching drama: ${error}`);
+  }
+
+  };
 
   const get_most_popular = async () => {
 
@@ -27,7 +70,6 @@ export default function HomePage() {
         const data = await response.json();
 
         Set_Media_Data(data);
-        console.log(data);
 
     } catch (error) {
 
@@ -40,7 +82,11 @@ export default function HomePage() {
     setSelectedProgram(program);
     setModalOpen(true);
   };
-  useEffect(() => { get_most_popular(); }, []);
+  useEffect(() => { 
+    get_most_popular(); 
+    get_animation();
+    get_drama();
+  }, []);
 
   return (
     <Box sx={{ position: "relative", backgroundColor: "#000", minHeight: "100vh" }}>
@@ -53,8 +99,8 @@ export default function HomePage() {
       <Row title="Top 10 in Israel this Week" onProgramClick={handleProgramClick} data={media_data} />
       <Row title="Your Reviews" onProgramClick={handleProgramClick} />
       <Row title="Popular Shows" onProgramClick={handleProgramClick} />
-      <Row title="Animation" onProgramClick={handleProgramClick} />
-      <Row title="Sci-Fi" onProgramClick={handleProgramClick} />
+      <Row title="Animation" onProgramClick={handleProgramClick} data={animation} />
+      <Row title="Drama" onProgramClick={handleProgramClick} data={drama}/>
       <Row title="Watchlist" onProgramClick={handleProgramClick} />
 
       <Footer />
