@@ -63,7 +63,7 @@ export default function HomePage() {
 
       const profile_id = localStorage.getItem('profile_id');
 
-      const response = await fetch(`${api_url}home/${profile_id}/top`);
+      const response = await fetch(`${api_url}home/${profile_id}/top/other`);
 
       if (!response.ok) throw new Error('Failed to fetch most popular');
 
