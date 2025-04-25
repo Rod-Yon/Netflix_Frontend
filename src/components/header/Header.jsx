@@ -15,7 +15,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { useTheme } from "@mui/material/styles";
 
-const api_url = 'http://localhost:8080';
+const api_url = 'https://netflix-backend-f9gl.onrender.com/';
 
 export default function Header({ activePage }) {
     const theme = useTheme();

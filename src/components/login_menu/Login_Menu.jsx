@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 
 import './Login_Menu.css';
 
-const api_url = 'http://localhost:8080';
+const api_url = 'https://netflix-backend-f9gl.onrender.com/';
 
 export default function Login_Menu() {
 

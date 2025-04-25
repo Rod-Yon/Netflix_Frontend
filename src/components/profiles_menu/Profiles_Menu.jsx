@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 
 import './Profiles_Menu.css'
 
-const api_url = 'http://localhost:8080';
+const api_url = 'https://netflix-backend-f9gl.onrender.com/';
 
 export default function Profile() {
 

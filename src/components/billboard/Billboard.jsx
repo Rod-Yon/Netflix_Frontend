@@ -3,7 +3,7 @@ import { Box, Typography, Button } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MoreInfoModal from "../more_info_modal/More_Info_Modal";
 
-const api_url = 'http://localhost:8080/';
+const api_url = 'https://netflix-backend-f9gl.onrender.com/';
 
 export default function Billboard({ type }) {
     const [mediaData, setMediaData] = useState([]);

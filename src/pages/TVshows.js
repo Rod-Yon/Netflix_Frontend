@@ -6,7 +6,7 @@ import Row from "../components/row/Row";
 import Footer from "../components/footer_homepage/Footer_Homepage";
 import MoreInfoModal from "../components/more_info_modal/More_Info_Modal";
 
-const api_url = 'http://localhost:8080/';
+const api_url = 'https://netflix-backend-f9gl.onrender.com/';
 
 export default function TVshows() {
     const [modalOpen, setModalOpen] = useState(false);
