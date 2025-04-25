@@ -33,7 +33,7 @@ export default function TVshows() {
             try {
                 const res = await fetch(`${api_url}home/${profile_id}/genre/Animation`);
                 const data = await res.json();
-                console.log("🎨 Animation Shows:", data); // ← Add this
+                console.log("🎨 Animation Shows:", data); 
                 setAnimation(data);
             } catch (err) {
                 console.error("Error fetching animation TV shows:", err);
@@ -44,7 +44,7 @@ export default function TVshows() {
             try {
                 const res = await fetch(`${api_url}home/${profile_id}/genre/Drama`);
                 const data = await res.json();
-                console.log("🎭 Drama Shows:", data); // ← Add this
+                console.log("🎭 Drama Shows:", data); 
                 setDrama(data);
             } catch (err) {
                 console.error("Error fetching drama TV shows:", err);

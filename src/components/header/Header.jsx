@@ -11,7 +11,6 @@ import {
     useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { useTheme } from "@mui/material/styles";
@@ -73,7 +72,7 @@ export default function Header({ activePage }) {
         <div
             style={{
                 position: "relative",
-                backgroundImage: `url(/path/to/cover.jpg)`, // will be handled by Billboard anyway
+                backgroundImage: `url(/path/to/cover.jpg)`, 
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }}

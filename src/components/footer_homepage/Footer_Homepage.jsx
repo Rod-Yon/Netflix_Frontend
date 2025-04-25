@@ -70,8 +70,8 @@ export default function Footer() {
           sx={{
             display: "grid",
             gridTemplateColumns: {
-              xs: "repeat(2, 1fr)",   // 2 columns on mobile
-              sm: "repeat(4, 1fr)",   // 4 columns on desktop
+              xs: "repeat(2, 1fr)",   
+              sm: "repeat(4, 1fr)",   
             },
             gap: 1,
             mb: 3,

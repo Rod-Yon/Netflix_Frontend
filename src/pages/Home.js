@@ -1,4 +1,3 @@
-// pages/HomePage.jsx
 import React, { useEffect, useState } from 'react';
 import Header from "../components/header/Header";
 import Billboard from "../components/billboard/Billboard";
@@ -9,8 +8,8 @@ import { Box } from "@mui/material";
 const api_url = 'http://localhost:8080/';
 
 export default function HomePage() {
-  const [modalOpen, setModalOpen] = useState(false);       // modal visibility
-  const [selectedProgram, setSelectedProgram] = useState(null); // clicked program data
+  const [modalOpen, setModalOpen] = useState(false);       
+  const [selectedProgram, setSelectedProgram] = useState(null); 
   const [media_data, Set_Media_Data] = React.useState([]);
   const [animation, Set_Animation] = React.useState([]);
   const [drama, Set_Drama] = React.useState([]);

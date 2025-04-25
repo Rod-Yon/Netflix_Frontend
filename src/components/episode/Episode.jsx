@@ -14,7 +14,7 @@ export default function Episode({ index, title, description, duration, thumbnail
                 borderRadius: 2,
                 alignItems: "flex-start",
                 mb: 2,
-                borderBottom: !isCurrent ? "1px solid #333" : "none", // ✅ Divider below non-highlighted episodes
+                borderBottom: !isCurrent ? "1px solid #333" : "none", 
             }}
         >
             {/* Episode number */}
@@ -24,7 +24,7 @@ export default function Episode({ index, title, description, duration, thumbnail
                     minWidth: "32px",
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "center", // ✅ vertical centering
+                    alignItems: "center", 
                     fontSize: "18px",
                     fontFamily: "ABeeZee, sans-serif",
                     color: "#fff",
@@ -55,12 +55,12 @@ export default function Episode({ index, title, description, duration, thumbnail
                             left: "50%",
                             transform: "translate(-50%, -50%)",
                             color: "#fff !important",
-                            fill: "#fff !important", // ✅ just in case SVG fill overrides it
+                            fill: "#fff !important", 
                             backgroundColor: "rgba(0,0,0,0.5)",
                             borderRadius: "50%",
                             fontSize: 53,
                             padding: "2px",
-                            border: "2px solid white", // ⬅️ white border around the circle
+                            border: "2px solid white", 
                         }}
                     />
                 )}

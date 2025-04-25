@@ -35,7 +35,7 @@ export default function Billboard({ type }) {
                 else {
                     sorted_data = data;
                 }
-            setMediaData(Object.values(sorted_data)); // Convert object to array
+            setMediaData(Object.values(sorted_data)); 
         } catch (error) {
             alert(`Error fetching billboard: ${error}`);
         }

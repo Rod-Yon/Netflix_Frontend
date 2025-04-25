@@ -27,7 +27,7 @@ export default function NewAndPopular() {
         window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 &&
         visibleCount < allPrograms.length
       ) {
-        // If content doesn't fill screen, load more items
+
         setVisibleCount((prev) => {
           const next = Math.min(prev + 8, allPrograms.length);
           return next === prev ? prev + 1 : next; // force re-render if maxed
@@ -48,7 +48,6 @@ export default function NewAndPopular() {
         document.body.offsetHeight <= window.innerHeight &&
         visibleCount < allPrograms.length
       ) {
-        // If content doesn't fill screen, load more items
         setVisibleCount((prev) => {
             const next = Math.min(prev + 8, allPrograms.length);
             return next === prev ? prev + 1 : next; // force re-render if maxed
@@ -59,7 +58,7 @@ export default function NewAndPopular() {
       if (visibleCount >= allPrograms.length) {
         setShowFooter(true);
       } else {
-        // Recheck footer condition
+
         const allLoaded = visibleCount >= allPrograms.length;
         const noScrollNeeded = document.body.offsetHeight <= window.innerHeight;
         setShowFooter(allLoaded && noScrollNeeded);

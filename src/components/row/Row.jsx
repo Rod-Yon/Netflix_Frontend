@@ -2,7 +2,6 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 
 export default function Row({ title, filter = "all", disableTopMargin = false, data = [], onProgramClick }) {
-    // const dummyItems = Array.from({ length: 10 });
 
     return (
         <Box sx={{
@@ -10,7 +9,7 @@ export default function Row({ title, filter = "all", disableTopMargin = false, d
             px: { xs: 2, sm: 4 },
             backgroundColor: "#000",
             position: "relative",
-            zIndex: 2, // make sure it's above the billboard image
+            zIndex: 2, 
         }}>
             {/* Row Title */}
             <Box sx={{ display: "flex", alignItems: "flex-end", height: "20px", mb: 1 }}>
@@ -34,18 +33,18 @@ export default function Row({ title, filter = "all", disableTopMargin = false, d
                 overflowX: "auto",
                 gap: 0.5,
                 py: 0.5,
-                pb: 0,     // remove bottom padding
-                mb: 0,     // remove bottom margin
+                pb: 0,     
+                mb: 0,     
                 scrollBehavior: "smooth",
-                scrollbarWidth: "none", // Firefox
+                scrollbarWidth: "none", 
                 "&::-webkit-scrollbar": {
-                    display: "none", // Chrome, Safari
+                    display: "none", 
                 },
             }}>
                 {data.map((program, i) => (
                     <Box
                         key={program._id || i}
-                        onClick={() => onProgramClick?.(program)} // ✅ trigger modal
+                        onClick={() => onProgramClick?.(program)} 
                         sx={{
                             flexShrink: 0,
                             minWidth: 218,
